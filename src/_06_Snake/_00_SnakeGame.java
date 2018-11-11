@@ -75,7 +75,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 	public void startGame() {
 		//1. Save the instructions for the game in the following string variable.
-		String instructions = "";
+		String instructions = "intructions";
 		
 		String[] options = new String[] { "Expert", "Moderate", "Beginner" };
 		int input = JOptionPane.showOptionDialog(null, instructions, "Snake", 0, -1, null, options, 0);
@@ -85,8 +85,20 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. Use a switch statement to determine which difficulty was chosen.
 		//   Use timer.setDelay(delay) with different numbers to change the speed
 		//   of the game. The smaller the number, the faster it goes.
+		switch (choice) {
+		case "Expert":
+			timer.setDelay(2);
+			break;
 
+		case "Moderate":
+			timer.setDelay(5);
+			break;
+		case "Beginner":
+			timer.setDelay(10);
+			break;
+		}
 		//3. start the timer
+		timer.start();
 	}
 
 	public static void main(String[] args) {
@@ -103,7 +115,28 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		//1. Use a switch statement on e.getKeyCode()
 		//   to determine which key was pressed.
-		
+		Direction down = Direction.DOWN;
+		Direction up = Direction.UP;
+		Direction right = Direction.RIGHT;
+		Direction left = Direction.LEFT;
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_DOWN:
+			snake.setDirection(down);
+			break;
+
+		case KeyEvent.VK_UP:
+			snake.setDirection(up);
+			break;
+		case KeyEvent.VK_RIGHT:
+			snake.setDirection(right);
+			break;
+		case KeyEvent.VK_LEFT:
+			snake.setDirection(left);
+			break;
+		case KeyEvent.VK_SPACE:
+			snake.feed();
+			break;
+		}
 		// if an arrow key is pressed, set the snake's 
 		// direction accordingly
 		
@@ -112,8 +145,9 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	}
 
 	private void setFoodLocation() {
-		//1. Create a new Location object that is set to a random location
-		
+		//1. Create a new Location object that is set to a random location]
+		//Set to RANDOM
+		Location gps = new Location(0, 0);
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
 		
