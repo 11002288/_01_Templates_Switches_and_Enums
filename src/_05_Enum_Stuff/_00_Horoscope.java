@@ -13,8 +13,47 @@ public class _00_Horoscope {
 	// a different horoscope based on the Zodiac's state.
 	// ARIES, TAURUS, GEMINI, CANCER, LEO, VIRGO,
 	// LIBRA, SCORPIO, SAGITTARIUS, CAPRICORN, AQUARIUS, PISCES
-	public _00_Horoscope(Enum scope) {
-		if  (scope == Zodiac.ARIES) {
+	public _00_Horoscope(Zodiac scope) {
+		switch (scope) {
+			case ARIES:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Ambitious, independent, impatient.");
+				break;
+	
+			case TAURUS:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Dependable, musical, practical");
+				break;
+			case GEMINI:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Curious, affectionate, kind");	
+				break;
+			case CANCER:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Intuitive, emotional, intelligent, passionate");
+				break;
+			case LEO:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Proud, bold, ambitious");
+				break;
+			case VIRGO:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Graceful, organized, kind");
+				break;
+			case LIBRA:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Diplomatic, artistic, intelligent");
+				break;
+			case SCORPIO:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Seductive, passionate, independent");
+				break;
+			case SAGITTARIUS:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Adventurous, creative, strong willed");
+				break;
+			case CAPRICORN:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Detail-oriented, intelligent, hardworking");
+				break;
+			case AQUARIUS:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Progressive, original, humanitarian, independent");
+				break;
+			case PISCES:
+				JOptionPane.showConfirmDialog(null, "Key Traits: Intuitive, compassionate, artistic, gentle, wise, musical.");
+				break;
+		}
+		/*if  (scope == Zodiac.ARIES) {
 			JOptionPane.showConfirmDialog(null, "Key Traits: Ambitious, independent, impatient.");
 		} else if (scope == Zodiac.TAURUS) {
 			JOptionPane.showConfirmDialog(null, "Key Traits: Dependable, musical, practical");
@@ -41,7 +80,7 @@ public class _00_Horoscope {
 		} else {
 			JOptionPane.showConfirmDialog(null, "That is not a Zodiac");
 
-		}
+		}*/
 		
 		
 	}
@@ -51,7 +90,8 @@ public class _00_Horoscope {
 	public static void main(String[] args) {
 		String some = JOptionPane.showInputDialog("What is your horoscope(ex: ARIES, TAURUS etc.)");
 		Zodiac horo = Zodiac.valueOf(some);
-		System.out.println(horo);
+		_00_Horoscope dog = new _00_Horoscope(horo);
+		
 		
 	}
 
