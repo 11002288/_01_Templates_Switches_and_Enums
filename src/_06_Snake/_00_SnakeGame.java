@@ -147,23 +147,42 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	private void setFoodLocation() {
 		//1. Create a new Location object that is set to a random location]
 		//Set to RANDOM
-		Location gps = new Location(0, 0);
+		Random r1 = new Random();
+		int randomWidth = r1.nextInt(WINDOW_WIDTH);
+		int randomLength = r1.nextInt(WINDOW_HEIGHT);
+		
+		Location gps = new Location(randomWidth, randomLength);
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
+		
+		if (snake.isLocationOnSnake(gps)) {
+			setFoodLocation();
+		}else {
+			foodLocation.equals(gps);
+			
+		}
+		
+		
 		
 	}
 
 	private void gameOver() {
 		
 		//1. stop the timer
-		
+		timer.stop();
 		//2. tell the user their snake is dead
-		
+		JOptionPane.showConfirmDialog(null, "Your snake is dead");
 		//3. ask them if they want to play again.
-		
+		int reply = JOptionPane.showInternalConfirmDialog(null, "Would you like to play again");
 		//4. if they want to play again
 		//   reset the snake and the food and start the timer
 		//   else, exit the game
+		if (reply == JOptionPane.YES_OPTION) {
+			startGame();
+		}else {
+			
+			
+		}
 		
 	}
 
@@ -175,13 +194,19 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//1. update the snake
-
+		snake.update();
 		//2. if the snake is colliding with its own body 
 		//   or if the snake is out of bounds, call gameOver
-
+		if (snake.isHeadCollidingWithBody()|snake.isOutOfBounds()) {
+			System.out.println("test");
+			gameOver();
+		}
 		//3. if the location of the head is equal to the location of the food,
 		// 	 feed the snake and set the food location
-
+		if (snake.getHeadLocation()==foodLocation) {
+			snake.feed();
+		}
 		//4. call panel.repaint();
+		panel.repaint();
 	}
 }
