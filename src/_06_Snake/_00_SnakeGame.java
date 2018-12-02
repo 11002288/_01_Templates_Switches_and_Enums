@@ -154,17 +154,17 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		Location gps = new Location(randomWidth, randomLength);
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
-		
-		if (snake.isLocationOnSnake(gps)) {
-			setFoodLocation();
-		}else {
-			foodLocation.equals(gps);
+		while (snake.isLocationOnSnake(gps)) {
+		 randomWidth = r1.nextInt(WINDOW_WIDTH);
+		 randomLength = r1.nextInt(WINDOW_HEIGHT);
+			
+		 gps = new Location(randomWidth, randomLength);
+		}
+		foodLocation=gps;
 			
 		}
-		
-		
-		
-	}
+	
+			
 
 	private void gameOver() {
 		
