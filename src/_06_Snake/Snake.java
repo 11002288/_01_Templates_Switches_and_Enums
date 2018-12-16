@@ -49,15 +49,15 @@ public class Snake {
 			break;
 		case UP:
 			x = getHeadLocation().x;
-			y = getHeadLocation().y + 1;
+			y = getHeadLocation().y - 1;
 			break;
 		case DOWN:
 			x = getHeadLocation().x;
-			y = getHeadLocation().y - 1;
+			y = getHeadLocation().y + 1;
 			break;
 		}
 		// 2. Iterate through the SnakeSegments in reverse order
-		for (int i = snake.size()+1; i > 0; i--) {
+		for (int i = snake.size()-1; i > 0; i--) {
 			// 2a. Update each snake segment to the location of the segment
 			// in front of it.
 			//snake.get(i).setLocation(snake.get(i-1));
@@ -77,9 +77,15 @@ public class Snake {
 		// set canMove equal to false.
 		// make sure the snake cannot completely reverse directions.
 		if (canMove == true) {
-			currentDirection.equals(d);
-			//canMove = false;
+			currentDirection = d;
 		}
+		if (d == Direction.DOWN && currentDirection!=Direction.UP) {
+			currentDirection = Direction.DOWN;
+			
+		}
+		
+		
+		
 
 	}
 
@@ -95,8 +101,8 @@ public class Snake {
 	public boolean isOutOfBounds() {
 		// 1. complete the method so it returns true if the head of the snake is outside
 		// of the window
-		if (head.getLocation().x < 0 || head.getLocation().x > 750 || head.getLocation().y < 0
-				|| head.getLocation().y > 600) {
+		if (head.getLocation().x < 0 || head.getLocation().x > 15 || head.getLocation().y < 0
+				|| head.getLocation().y > 12) {
 			return true;
 		} else {
 
@@ -109,7 +115,7 @@ public class Snake {
 	public boolean isHeadCollidingWithBody() {
 		// 1. complete the method so it returns true if the head is located
 		// in the same location as any other body segment
-		for (int i = 0; i < snake.size(); i++) {
+		for (int i = 1; i < snake.size(); i++) {
 
 			if (getHeadLocation().equals(snake.get(i).getLocation())) {
 				return true;

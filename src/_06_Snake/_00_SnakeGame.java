@@ -38,6 +38,9 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	private Location foodLocation;
 
 	public _00_SnakeGame() {
+		Random r2 = new Random();
+		int randomW = r2.nextInt(WIDTH);
+		int randomL = r2.nextInt(HEIGHT);
 		snake = new Snake(new Location(WIDTH / 2, HEIGHT / 2));
 
 		window = new JFrame("Snake");
@@ -87,14 +90,14 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//   of the game. The smaller the number, the faster it goes.
 		switch (choice) {
 		case "Expert":
-			timer.setDelay(2);
+			timer.setDelay(60);
 			break;
 
 		case "Moderate":
-			timer.setDelay(5);
+			timer.setDelay(80);
 			break;
 		case "Beginner":
-			timer.setDelay(10);
+			timer.setDelay(100);
 			break;
 		}
 		//3. start the timer
@@ -122,6 +125,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_DOWN:
 			snake.setDirection(down);
+			System.out.println("down");
 			break;
 
 		case KeyEvent.VK_UP:
@@ -148,15 +152,15 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//1. Create a new Location object that is set to a random location]
 		//Set to RANDOM
 		Random r1 = new Random();
-		int randomWidth = r1.nextInt(WINDOW_WIDTH);
-		int randomLength = r1.nextInt(WINDOW_HEIGHT);
+		int randomWidth = r1.nextInt(WIDTH);
+		int randomLength = r1.nextInt(HEIGHT);
 		
 		Location gps = new Location(randomWidth, randomLength);
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
 		while (snake.isLocationOnSnake(gps)) {
-		 randomWidth = r1.nextInt(WINDOW_WIDTH);
-		 randomLength = r1.nextInt(WINDOW_HEIGHT);
+		 randomWidth = r1.nextInt(WIDTH);
+		 randomLength = r1.nextInt(HEIGHT);
 			
 		 gps = new Location(randomWidth, randomLength);
 		}
@@ -173,11 +177,17 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. tell the user their snake is dead
 		JOptionPane.showConfirmDialog(null, "Your snake is dead");
 		//3. ask them if they want to play again.
-		int reply = JOptionPane.showInternalConfirmDialog(null, "Would you like to play again");
+		int reply = JOptionPane.showConfirmDialog(null, "Would you like to play again");
 		//4. if they want to play again
 		//   reset the snake and the food and start the timer
 		//   else, exit the game
+		Random r2 = new Random();
+		int randomW = r2.nextInt(WIDTH);
+		int randomL = r2.nextInt(HEIGHT);
+		Location loc = new Location(randomW, randomL);
 		if (reply == JOptionPane.YES_OPTION) {
+			snake.reset(loc);
+			setFoodLocation();
 			startGame();
 		}else {
 			
@@ -197,8 +207,8 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		snake.update();
 		//2. if the snake is colliding with its own body 
 		//   or if the snake is out of bounds, call gameOver
-		if (snake.isHeadCollidingWithBody()|snake.isOutOfBounds()) {
-			System.out.println("test");
+		if (snake.isHeadCollidingWithBody()||snake.isOutOfBounds()) {
+			System.out.println("tesssst");
 			gameOver();
 		}
 		//3. if the location of the head is equal to the location of the food,
