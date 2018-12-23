@@ -26,6 +26,7 @@ public class Snake {
 	public void feed() {
 		// 1. add a new SnakeSegment object to the snake
 		snake.add(new SnakeSegment(snake.get(0).getLocation(), BODY_SIZE));
+		
 	}
 
 	public Location getHeadLocation() {
@@ -76,14 +77,26 @@ public class Snake {
 		// is true.
 		// set canMove equal to false.
 		// make sure the snake cannot completely reverse directions.
-		if (canMove == true) {
+		
+		
+		if (currentDirection!= Direction.DOWN && d == Direction.UP) {
 			currentDirection = d;
-		}
-		if (d == Direction.DOWN && currentDirection!=Direction.UP) {
-			currentDirection = Direction.DOWN;
+			
+		}if(currentDirection!= Direction.UP && d == Direction.DOWN) {
+			currentDirection = d;
+			
+		}if(currentDirection != Direction.LEFT && d == Direction.RIGHT) {
+			currentDirection = d;
+			
+		}if(currentDirection != Direction.RIGHT && d == Direction.LEFT) {
+			currentDirection = d;
 			
 		}
 		
+		if (canMove == true) {
+			currentDirection = d;
+			
+		}
 		
 		
 
@@ -115,10 +128,13 @@ public class Snake {
 	public boolean isHeadCollidingWithBody() {
 		// 1. complete the method so it returns true if the head is located
 		// in the same location as any other body segment
+		
 		for (int i = 1; i < snake.size(); i++) {
 
 			if (getHeadLocation().equals(snake.get(i).getLocation())) {
+				System.out.println("Wisdom teeth");
 				return true;
+				
 			}
 
 		}

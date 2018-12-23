@@ -101,7 +101,16 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 			break;
 		}
 		//3. start the timer
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		timer.start();
+		
+		
+		
 	}
 
 	public static void main(String[] args) {
@@ -125,7 +134,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_DOWN:
 			snake.setDirection(down);
-			System.out.println("down");
+			
 			break;
 
 		case KeyEvent.VK_UP:
@@ -208,13 +217,14 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. if the snake is colliding with its own body 
 		//   or if the snake is out of bounds, call gameOver
 		if (snake.isHeadCollidingWithBody()||snake.isOutOfBounds()) {
-			System.out.println("tesssst");
+			
 			gameOver();
 		}
 		//3. if the location of the head is equal to the location of the food,
 		// 	 feed the snake and set the food location
-		if (snake.getHeadLocation()==foodLocation) {
+		if (snake.getHeadLocation().equals(foodLocation)) {
 			snake.feed();
+			setFoodLocation();
 		}
 		//4. call panel.repaint();
 		panel.repaint();
